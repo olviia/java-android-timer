@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.btn_start);
         startButton.setText("Start");
         restartButton = findViewById(R.id.btn_restart);
-        restartButton.setVisibility(View.INVISIBLE);
+        restartButton.setVisibility(View.GONE);
 
         myRunnable = new Runnable() {
             @Override

@@ -17,26 +17,26 @@ public class TimerButtonsAction {
     private static int hours = 0;
     public static boolean isRunning = true;
 
-        public static void btnStartClick(Button startButton, Button restartButton){
-                if(isRunning){
-                    startTimer();
-                    startButton.setText("Pause");
-                    isRunning = false;
-                    restartButton.setVisibility(View.INVISIBLE);
-                }else{
-                    stopTimer();
-                    startButton.setText("Start");
-                    isRunning = true;
-                    restartButton.setVisibility(View.VISIBLE);
-                }
+    public static void btnStartClick(Button startButton, Button restartButton){
+            if(isRunning){
+                startTimer();
+                startButton.setText("Pause");
+                isRunning = false;
+                restartButton.setVisibility(View.GONE);
+            }else{
+                stopTimer();
+                startButton.setText("Start");
+                isRunning = true;
+                restartButton.setVisibility(View.VISIBLE);
             }
-
-        public static void btnRestartClick(Button restartButton, TextView timeText) {
-            timerToZero();
-            isRunning = true;
-            restartButton.setVisibility(View.INVISIBLE);
-            timeText.setText(getCurrentTime());
         }
+
+    public static void btnRestartClick(Button restartButton, TextView timeText) {
+        timerToZero();
+        isRunning = true;
+        restartButton.setVisibility(View.GONE);
+        timeText.setText(getCurrentTime());
+    }
 
     private static void stopTimer(){
         MainActivity.handler.removeCallbacks(MainActivity.myRunnable);
