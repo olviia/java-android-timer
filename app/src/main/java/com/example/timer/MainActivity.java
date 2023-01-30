@@ -20,19 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView timeText;
     private Button startButton;
     private Button restartButton;
-    private  String timeValue = "00:00:00:0";
-    private  int miliseconds = 0;
-    private  int seconds = 0;
-    private  int minutes = 0;
-    private  int hours = 0;
-    private boolean isRunning = true;
-    private Handler handler = new Handler();
-    private Runnable myRunnable = new Runnable() {
-        @Override
-        public void run() {
-            timeTextUpdate();
-            handler.postDelayed(this,100);
-        }};
+    public static Handler handler = new Handler();
+    public static Runnable myRunnable ;
 
 
     @Override
@@ -41,88 +30,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timeText = findViewById(R.id.text_time);
-        timeText.setText(timeValue);
         startButton = findViewById(R.id.btn_start);
         startButton.setText("Start");
         restartButton = findViewById(R.id.btn_restart);
         restartButton.setVisibility(View.INVISIBLE);
 
+        myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                TimerButtonsAction.timeTextUpdate(timeText);
+                handler.postDelayed(this,100);
+            }};
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isRunning){
-                    startTimer();
-                    startButton.setText("Pause");
-                    isRunning = false;
-                    restartButton.setVisibility(View.INVISIBLE);
-                }else{
-                    stopTimer();
-                    startButton.setText("Continue");
-                    isRunning = true;
-                    restartButton.setVisibility(View.VISIBLE);
-                }
+                TimerButtonsAction.btnStartClick(startButton, restartButton);
             }
         });
 
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeTextRestart();
-                startTimer();
-                isRunning = false;
-                startButton.setText("Pause");
-                restartButton.setVisibility(View.INVISIBLE);
+                TimerButtonsAction.btnRestartClick(restartButton, timeText);
             }
         });
     }
 
-    private void stopTimer(){
-        handler.removeCallbacks(myRunnable);
-    }
 
-    public void startTimer() {
-        handler.postAtFrontOfQueue(myRunnable);
-    }
-
-
-    public void timeTextUpdate(){
-        if(miliseconds<9){
-            miliseconds++;
-        } else if(miliseconds == 9){
-            if(seconds<59){
-                miliseconds = 0;
-                seconds++;
-            } else if (seconds == 59){
-                if (minutes<59) {
-                    minutes++;
-                    seconds = 0;
-                } else if(minutes == 59){
-                    if(hours<24){
-                        hours++;
-                        minutes = 0;}
-                    else{
-                        timerToZero();
-                    }
-                }
-            }
-        }
-        setTimerText(hours, minutes, seconds,miliseconds);
-
-    }
-    public void timeTextRestart(){
-        timerToZero();
-        setTimerText(hours, minutes, seconds,miliseconds);
-    }
-
-    public void setTimerText(int hours, int minutes, int seconds, int miliseconds){
-        NumberFormat formatter = new DecimalFormat("00");
-        timeValue = formatter.format(hours) + ":" + formatter.format(minutes) + ":" + formatter.format(seconds) +":"+miliseconds;
-        timeText.setText(timeValue);
-    }
-    public void timerToZero(){
-        seconds = 0;
-        hours = 0;
-        minutes = 0;
-        miliseconds = 0;
-    }
 }
