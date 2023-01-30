@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView timeText;
     private Button startButton;
     private Button restartButton;
-    private  String timeValue = "00:00:00:00";
+    private  String timeValue = "00:00:00:0";
     private  int miliseconds = 0;
     private  int seconds = 0;
     private  int minutes = 0;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             timeTextUpdate();
-            handler.postDelayed(this,1);
+            handler.postDelayed(this,100);
         }};
 
 
@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startTimer() {
-        handler.post(myRunnable);
+        handler.postAtFrontOfQueue(myRunnable);
     }
 
 
     public void timeTextUpdate(){
-        if(miliseconds<99){
+        if(miliseconds<9){
             miliseconds++;
-        } else if(miliseconds == 99){
+        } else if(miliseconds == 9){
             if(seconds<59){
                 miliseconds = 0;
                 seconds++;
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setTimerText(int hours, int minutes, int seconds, int miliseconds){
         NumberFormat formatter = new DecimalFormat("00");
-        timeValue = formatter.format(hours) + ":" + formatter.format(minutes) + ":" + formatter.format(seconds) +":"+formatter.format(miliseconds);
+        timeValue = formatter.format(hours) + ":" + formatter.format(minutes) + ":" + formatter.format(seconds) +":"+miliseconds;
         timeText.setText(timeValue);
     }
     public void timerToZero(){
