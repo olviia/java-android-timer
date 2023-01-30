@@ -15,6 +15,7 @@ public class TimerButtonsAction {
     private static int seconds = 0;
     private static int minutes = 0;
     private static int hours = 0;
+    private static int fakeMilliseconds = 0;
     public static boolean isRunning = true;
 
     public static void btnStartClick(Button startButton, Button restartButton){
