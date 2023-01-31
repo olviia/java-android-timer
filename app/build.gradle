@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.timer'
+    namespace 'com.stopwatcholv.timer'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.timer"
+        applicationId "com.stopwatcholv.timer"
         minSdk 23
         targetSdk 32
         versionCode 1

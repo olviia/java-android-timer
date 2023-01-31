@@ -1,5 +1,6 @@
-package com.example.timer;
+package com.stopwatcholv.timer;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,8 +16,10 @@ public class TimerButtonsAction {
     private static int seconds = 0;
     private static int minutes = 0;
     private static int hours = 0;
-    private static int fakeMilliseconds = 0;
+    private static double fakeMilliseconds = 0;
     public static boolean isRunning = true;
+
+
 
     public static void btnStartClick(Button startButton, Button restartButton){
             if(isRunning){
@@ -41,28 +44,31 @@ public class TimerButtonsAction {
 
     private static void stopTimer(){
         MainActivity.handler.removeCallbacks(MainActivity.myRunnable);
+        MainActivity.fakeHandler.removeCallbacks(MainActivity.fakeRunnable);
     }
 
     private static void startTimer() {
         MainActivity.handler.postAtFrontOfQueue(MainActivity.myRunnable);
+        MainActivity.fakeHandler.post(MainActivity.fakeRunnable);
     }
 
 
-    public static void  timeTextUpdate(TextView timeText){
+    public static void  timeTextUpdate(TextView timeText, TextView fakeTimeText){
+        fakeMilliseconds = 0.02;
         if(miliseconds<9){
             miliseconds++;
-        } else if(miliseconds == 9){
+        } else{
+            miliseconds = 0;
             if(seconds<59){
-                miliseconds = 0;
                 seconds++;
-            } else if (seconds == 59){
+            } else{
+                seconds = 0;
                 if (minutes<59) {
                     minutes++;
-                    seconds = 0;
-                } else if(minutes == 59){
+                } else{
+                    minutes = 0;
                     if(hours<24){
-                        hours++;
-                        minutes = 0;}
+                        hours++;}
                     else{
                         timerToZero();
                     }
@@ -78,6 +84,7 @@ public class TimerButtonsAction {
         hours = 0;
         minutes = 0;
         miliseconds = 0;
+        fakeMilliseconds = 0;
     }
 
     public static String getCurrentTime(){
@@ -85,5 +92,13 @@ public class TimerButtonsAction {
             String currentTime = formatter.format(hours) + ":" + formatter.format(minutes) + ":" +
                                     formatter.format(seconds) +":"+miliseconds;
             return currentTime;
+    }
+    public static void fakeTimeUpdate(TextView fakeTime){
+        NumberFormat formatter1 = new DecimalFormat("0");
+        //int temp = fakeMilliseconds.intValue();
+        fakeTime.setText("" +formatter1.format(fakeMilliseconds));
+        Log.d("olvinfo", "miliseconds = " + miliseconds +" fakemili =  " + fakeMilliseconds +
+                " temp = " + formatter1.format(fakeMilliseconds));
+        fakeMilliseconds+=1.47;
     }
 }

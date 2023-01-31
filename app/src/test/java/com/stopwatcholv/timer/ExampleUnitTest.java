@@ -1,4 +1,4 @@
-package com.example.timer;
+package com.stopwatcholv.timer;
 
 import org.junit.Test;
 
