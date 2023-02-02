@@ -48,23 +48,30 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/add_icon" />
+
+            <ImageButton
                 android:id="@+id/btn_restart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
-                android:text="Restart"
-                android:textSize="24sp" />
+                android:src="@drawable/restart_icon" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
-                android:text="Start"
-                android:textSize="24sp" />
+                android:src="@drawable/start_icon"
+                 />
 
         </LinearLayout>
 

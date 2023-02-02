@@ -6,13 +6,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView timeText;
     private TextView fakeTimeText;
-    private Button startButton;
-    private Button restartButton;
+    private ImageButton startButton;
+    private ImageButton restartButton;
+    private ImageButton addButton;
     public static Handler handler = new Handler();
     public static Runnable myRunnable ;
 
@@ -31,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
         timeText = findViewById(R.id.text_time);
         fakeTimeText = findViewById(R.id.text_fake_millisecond);
         startButton = findViewById(R.id.btn_start);
-        startButton.setText("Start");
+        startButton.setImageResource(R.drawable.start_icon);
         restartButton = findViewById(R.id.btn_restart);
         restartButton.setVisibility(View.GONE);
+        addButton = findViewById(R.id.btn_add);
+        addButton.setVisibility(View.GONE);
 
         myRunnable = new Runnable() {
             @Override
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimerButtonsAction.btnStartClick(startButton, restartButton);
+                TimerButtonsAction.btnStartClick(startButton, restartButton, addButton);
             }
         });
 
