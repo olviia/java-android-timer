@@ -3,6 +3,7 @@ package com.stopwatcholv.timer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -21,21 +22,23 @@ public class TimerButtonsAction {
 
 
 
-    public static void btnStartClick(Button startButton, Button restartButton){
+    public static void btnStartClick(ImageButton startButton, ImageButton restartButton, ImageButton addButton){
             if(isRunning){
                 startTimer();
-                startButton.setText("Pause");
+                startButton.setImageResource(R.drawable.pause_icon);
                 isRunning = false;
+                addButton.setVisibility(View.VISIBLE);
                 restartButton.setVisibility(View.GONE);
             }else{
                 stopTimer();
-                startButton.setText("Start");
+                startButton.setImageResource(R.drawable.start_icon);
                 isRunning = true;
+                addButton.setVisibility(View.GONE);
                 restartButton.setVisibility(View.VISIBLE);
             }
         }
 
-    public static void btnRestartClick(Button restartButton, TextView timeText) {
+    public static void btnRestartClick(ImageButton restartButton, TextView timeText) {
         timerToZero();
         isRunning = true;
         restartButton.setVisibility(View.GONE);

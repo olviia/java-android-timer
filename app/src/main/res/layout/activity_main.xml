@@ -7,6 +7,18 @@
     android:onClick="startTimer"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/cred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Created by Olviia"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027" />
+
     <LinearLayout
         android:id="@+id/general_layout"
         android:layout_width="match_parent"
@@ -38,8 +50,9 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="@color/grey"
-                android:textSize="60sp"  />
+                android:textSize="60sp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/layout_buttons"
@@ -48,38 +61,38 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/add_icon" />
+
+            <ImageButton
                 android:id="@+id/btn_restart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
-                android:text="Restart"
-                android:textSize="24sp" />
+                android:src="@drawable/restart_icon" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
-                android:text="Start"
-                android:textSize="24sp" />
+                android:src="@drawable/start_icon" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_saved_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
 
-    <TextView
-        android:id="@+id/cred"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:text="Created by Olviia"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
