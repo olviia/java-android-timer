@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stopwatcholv.timer.R;
+import com.stopwatcholv.timer.SavedTimeList;
 
 import java.util.ArrayList;
 
@@ -33,8 +34,15 @@ public class ItemSavedTimeAdapter extends  RecyclerView.Adapter<ItemSavedTimeAda
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.numberID.setText(String.valueOf(position+1));
         holder.timeText.setText(savedTimes.get(position));
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SavedTimeList.removeTimeFromList(holder.getAdapterPosition());
+                notifyDataSetChanged();
+                SavedTimeList.updateRecyclerLayout();
+            }
+        });
     }
 
     @Override
@@ -44,13 +52,11 @@ public class ItemSavedTimeAdapter extends  RecyclerView.Adapter<ItemSavedTimeAda
 
 
     public static class myViewHolder extends RecyclerView.ViewHolder{
-        public TextView numberID;
         public TextView timeText;
         public ImageButton deleteButton;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            numberID = itemView.findViewById(R.id.saved_time_number);
             timeText = itemView.findViewById(R.id.saved_time);
             deleteButton=itemView.findViewById(R.id.delete_btn);
 

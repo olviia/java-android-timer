@@ -1,22 +1,17 @@
 package com.stopwatcholv.timer;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.stopwatcholv.timer.adapters.ItemSavedTimeAdapter;
-import com.stopwatcholv.timer.adapters.SavedTimeList;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private TextView timeText;
@@ -26,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton addButton;
     public static Handler handler = new Handler();
     public static Runnable myRunnable ;
-    private  RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    public static   RecyclerView recyclerView;
+    public static RecyclerView.Adapter mAdapter;
+    private LinearLayoutManager layoutManager;
+
+    public static DisplayMetrics displayMetrics = new DisplayMetrics();
 
 
     //Default handler works with 100 ms delay correctly, but 1ms or even 10 ms - it's too fast and handler
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.btn_add);
         addButton.setVisibility(View.GONE);
 
-        SavedTimeList.savedTimes.add("00:00:00:0");
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         myRunnable = new Runnable() {
             @Override
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddTimeButtonAction.btnAddClick();
+                SavedTimeList.onAddButtonClick(TimerButtonsAction.getCurrentTime());
             }
         });
 
