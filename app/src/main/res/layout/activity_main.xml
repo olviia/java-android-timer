@@ -4,20 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="startTimer"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/cred"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Created by Olviia"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
 
     <LinearLayout
         android:id="@+id/general_layout"
@@ -28,6 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cred"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Created by Olviia"
+            android:textAlignment="center"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:id="@+id/layout_timer"
@@ -41,16 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00:00:0"
-                android:textColor="@color/grey"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="60sp" />
 
-            <TextView
-                android:id="@+id/text_fake_millisecond"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/grey"
-                android:textSize="60sp" />
         </LinearLayout>
 
 
@@ -62,12 +50,28 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/btn_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/copy_icon" />
+
+            <ImageButton
+                android:id="@+id/btn_delete_all_saved_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/delete_big_icon" />
+            <ImageButton
                 android:id="@+id/btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
                 android:src="@drawable/add_icon" />
+
 
             <ImageButton
                 android:id="@+id/btn_restart"
@@ -91,6 +95,7 @@
             android:id="@+id/recycler_saved_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/border_recycler"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>

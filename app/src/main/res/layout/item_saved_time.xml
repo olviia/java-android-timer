@@ -13,6 +13,14 @@
         android:layout_margin="0dp"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/info_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="?colorPrimaryVariant"
+            app:srcCompat="@drawable/info_saved_time" />
+
 
         <TextView
             android:id="@+id/saved_time"
@@ -26,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:backgroundTint="?colorPrimaryVariant"
             app:srcCompat="@drawable/delete_icon" />
 
     </LinearLayout>
