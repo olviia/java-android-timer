@@ -24,6 +24,7 @@ public class AnnotationPopups {
         final EditText input = new EditText(view.getContext());
         input.setPadding(30, 0,0,30);
         input.setTextSize(24);
+        input.setText(SavedTimeAnnotation.getAnnotation(holder.getAdapterPosition()));
         builder.setView(input);
 
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -49,9 +50,8 @@ public class AnnotationPopups {
         TextView info = new TextView(view.getContext());
         info.setPadding(30, 0,0,30);
         info.setTextSize(24);
-        info.setTextColor(view.getResources().getColor(R.color.grey, null));
         info.setText(SavedTimeAnnotation.getAnnotation(holder.getAdapterPosition()));
-        Log.d("olvinfo", info.getText().toString());
+
         builder.setView(info);
 
         builder.setPositiveButton("Change", new DialogInterface.OnClickListener() {
@@ -76,7 +76,7 @@ public class AnnotationPopups {
         builder.show();
     }
 
-    private static void changeAnnotationButton(View view, String text){
+    public static void changeAnnotationButton(View view, String text){
 
         if((text.replaceAll(" ", "").equals("") )){//дописати зміну кольору
             ((ImageButton)view).setColorFilter(((ImageButton)view).getResources().getColor(R.color.grey, null));

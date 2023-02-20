@@ -12,7 +12,7 @@ public class SavedTimeAnnotation {
         annotation.set(index, text);
     }
     public static void addAnnotation(String text){
-        annotation.add(text);
+        annotation.add(0,text);
     }
     public static  String getAnnotation(int index){
         return annotation.get(index);

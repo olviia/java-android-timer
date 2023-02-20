@@ -14,8 +14,9 @@ public class SavedTimeList {
         savedTimes.remove(position);
     }
     public static void onAddButtonClick (String currentTime){
-        MainActivity.mAdapter.notifyDataSetChanged();
         saveTimeToList(currentTime);
+        MainActivity.mAdapter.notifyItemInserted(0);
+        MainActivity.recyclerView.scrollToPosition(0);
         updateRecyclerLayout();
     }
     public static void updateRecyclerLayout(){
@@ -40,8 +41,9 @@ public class SavedTimeList {
     }
     public static String textToCopy(){
         String finalText = "";
-        for (int i = 0; i<savedTimes.size();i++) {
-            finalText = finalText + savedTimes.get(i) + "   -   " +  SavedTimeAnnotation.getAnnotation(i) + "\n";
+        for (int i = savedTimes.size()-1; i>=0;i--) {
+            finalText = finalText + savedTimes.get(i) + (SavedTimeAnnotation.getAnnotation(i).equals("")?  "" :
+                                                        "   -   " )+  SavedTimeAnnotation.getAnnotation(i) + "\n";
         }
         return finalText;
     }

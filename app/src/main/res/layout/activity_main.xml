@@ -50,6 +50,13 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/btn_delete_all_saved_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/green"
+                android:src="@drawable/delete_big_icon" />
+            <ImageButton
                 android:id="@+id/btn_copy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,13 +64,6 @@
                 android:backgroundTint="@color/green"
                 android:src="@drawable/copy_icon" />
 
-            <ImageButton
-                android:id="@+id/btn_delete_all_saved_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:backgroundTint="@color/green"
-                android:src="@drawable/delete_big_icon" />
             <ImageButton
                 android:id="@+id/btn_add"
                 android:layout_width="wrap_content"

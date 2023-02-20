@@ -39,22 +39,43 @@ public class ItemSavedTimeAdapter extends  RecyclerView.Adapter<ItemSavedTimeAda
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_saved_time,parent,false);
-        myViewHolder holder = new myViewHolder(view);
-        return holder;
+        return new myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+
+
         holder.timeText.setText(savedTimes.get(position));
+        ImageButton tempInfo = holder.infoButton;
+
+        if(SavedTimeAnnotation.getAnnotation(position).equals("")){
+            AnnotationPopups.changeAnnotationButton(tempInfo, "");
+        }else{
+            AnnotationPopups.changeAnnotationButton(tempInfo, "notempty");
+        }
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SavedTimeList.removeTimeFromList(holder.getAdapterPosition());
-                SavedTimeAnnotation.removeAnnotation(holder.getAdapterPosition());
-                notifyDataSetChanged();
-                SavedTimeList.updateRecyclerLayout();
-                if(SavedTimeList.savedTimes.size()==0){
-                    MainActivity.deleteAllButton.setVisibility(View.GONE);
+                try{
+                    final int tempposition = holder.getAdapterPosition();
+                    SavedTimeList.removeTimeFromList(tempposition);
+                    SavedTimeAnnotation.removeAnnotation(tempposition);
+
+                    AnnotationPopups.changeAnnotationButton(tempInfo, "");
+                    notifyItemRemoved(tempposition);
+                    SavedTimeList.updateRecyclerLayout();
+                    if(SavedTimeList.savedTimes.size()==0){
+                        MainActivity.deleteAllButton.setVisibility(View.GONE);
+                        MainActivity.copyButton.setVisibility(View.GONE);
+                    }
+
+                } catch (ArrayIndexOutOfBoundsException e){
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
@@ -66,8 +87,6 @@ public class ItemSavedTimeAdapter extends  RecyclerView.Adapter<ItemSavedTimeAda
                 } else{
                     AnnotationPopups.annotationShowText(view, holder);
                 }
-
-
             }
         });
     }
@@ -88,7 +107,6 @@ public class ItemSavedTimeAdapter extends  RecyclerView.Adapter<ItemSavedTimeAda
             timeText = itemView.findViewById(R.id.saved_time);
             deleteButton=itemView.findViewById(R.id.delete_btn);
             infoButton=itemView.findViewById(R.id.info_btn);
-
         }
     }
 }

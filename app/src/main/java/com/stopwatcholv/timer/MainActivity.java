@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton startButton;
     private ImageButton restartButton;
     private ImageButton addButton;
-    private ImageButton copyButton;
+    public static ImageButton copyButton;
     public static ImageButton deleteAllButton;
     public static Handler handler = new Handler();
     public static Runnable myRunnable ;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SavedTimeList.clearAll();
+                //AnnotationPopups.changeAnnotationButton(ItemSavedTimeAdapter.myViewHolder.itemView.findViewById(R.id.info_btn), SavedTimeAnnotation.getAnnotation(ItemSavedTimeAdapter.myViewHolder.getAdapterPosition()), "");
                 deleteAllButton.setVisibility(View.GONE);
                 copyButton.setVisibility(View.GONE);
             }
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new ItemSavedTimeAdapter(SavedTimeList.savedTimes, MainActivity.this);
         recyclerView.setAdapter(mAdapter);
+        recyclerView.getRecycledViewPool().setMaxRecycledViews(0,0);
 
     }
 
