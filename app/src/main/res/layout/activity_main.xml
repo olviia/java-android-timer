@@ -35,12 +35,11 @@
                 android:id="@+id/text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00:00:0"
+                android:text="00:00:00:00"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="60sp" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/layout_buttons"

@@ -17,8 +17,9 @@ import android.widget.Toast;
 
 import com.stopwatcholv.timer.adapters.ItemSavedTimeAdapter;
 
+
 public class MainActivity extends AppCompatActivity {
-    private TextView timeText;
+    public static TextView timeText;
     private ImageButton startButton;
     private ImageButton restartButton;
     private ImageButton addButton;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static ImageButton deleteAllButton;
     public static Handler handler = new Handler();
     public static Runnable myRunnable ;
-    public static   RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     public static RecyclerView.Adapter mAdapter;
     private LinearLayoutManager layoutManager;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 TimerButtonsAction.timeTextUpdate(timeText);
-                handler.postDelayed(this,100);
+                handler.postDelayed(this,0);
             }};
 
         startButton.setOnClickListener(new View.OnClickListener() {

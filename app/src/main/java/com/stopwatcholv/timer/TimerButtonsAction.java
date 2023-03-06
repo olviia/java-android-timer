@@ -1,27 +1,30 @@
 package com.stopwatcholv.timer;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 
 public class TimerButtonsAction {
 
-    private static int miliseconds = 0;
-    private static int seconds = 0;
-    private static int minutes = 0;
-    private static int hours = 0;
     public static boolean isRunning = true;
+    private static boolean onStart = true;
+
+    public static long startTime = 0;
+    private static long pauseTime = 0;
 
 
 
     public static void btnStartClick(ImageButton startButton, ImageButton restartButton, ImageButton addButton){
             if(isRunning){
+                if(onStart){
+                    startTime = System.currentTimeMillis();
+                    onStart = false;
+                } else{
+                    startTime += (System.currentTimeMillis()-pauseTime);
+                }
                 startTimer();
                 startButton.setImageResource(R.drawable.pause_icon);
                 isRunning = false;
@@ -33,12 +36,14 @@ public class TimerButtonsAction {
                 isRunning = true;
                 addButton.setVisibility(View.GONE);
                 restartButton.setVisibility(View.VISIBLE);
+                pauseTime = System.currentTimeMillis();
             }
         }
 
     public static void btnRestartClick(ImageButton restartButton, TextView timeText) {
         timerToZero();
         isRunning = true;
+        onStart = true;
         restartButton.setVisibility(View.GONE);
         timeText.setText(getCurrentTime());
     }
@@ -48,46 +53,22 @@ public class TimerButtonsAction {
     }
 
     private static void startTimer() {
-        MainActivity.handler.postAtFrontOfQueue(MainActivity.myRunnable);
+        MainActivity.handler.postDelayed(MainActivity.myRunnable, 0);
     }
 
-
     public static void  timeTextUpdate(TextView timeText){
-        if(miliseconds<9){
-            miliseconds++;
-        } else{
-            miliseconds = 0;
-            if(seconds<59){
-                seconds++;
-            } else{
-                seconds = 0;
-                if (minutes<59) {
-                    minutes++;
-                } else{
-                    minutes = 0;
-                    if(hours<24){
-                        hours++;}
-                    else{
-                        timerToZero();
-                    }
-                }
-            }
-        }
-        timeText.setText(getCurrentTime());
-
+        long time = System.currentTimeMillis() - TimerButtonsAction.startTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss:SS");
+        String temporaryString = sdf.format(time);
+        timeText.setText(temporaryString);
     }
 
     public static void timerToZero(){
-        seconds = 0;
-        hours = 0;
-        minutes = 0;
-        miliseconds = 0;
+        MainActivity.timeText.setText("00:00:00:00");
     }
 
     public static String getCurrentTime(){
-            NumberFormat formatter = new DecimalFormat("00");
-            String currentTime = formatter.format(hours) + ":" + formatter.format(minutes) + ":" +
-                                    formatter.format(seconds) +":"+miliseconds;
+            String currentTime = MainActivity.timeText.getText().toString();
             return currentTime;
     }
 }
