@@ -10,12 +10,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stopwatcholv.timer.adapters.ItemSavedTimeAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 TimerButtonsAction.timeTextUpdate(timeText);
                 handler.postDelayed(this,0);
+
             }};
 
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SavedTimeList.clearAll();
-                //AnnotationPopups.changeAnnotationButton(ItemSavedTimeAdapter.myViewHolder.itemView.findViewById(R.id.info_btn), SavedTimeAnnotation.getAnnotation(ItemSavedTimeAdapter.myViewHolder.getAdapterPosition()), "");
                 deleteAllButton.setVisibility(View.GONE);
                 copyButton.setVisibility(View.GONE);
             }

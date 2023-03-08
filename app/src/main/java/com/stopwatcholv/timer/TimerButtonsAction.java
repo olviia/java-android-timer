@@ -5,7 +5,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
+import java.util.Locale;
 
 public class TimerButtonsAction {
 
@@ -57,9 +62,20 @@ public class TimerButtonsAction {
     }
 
     public static void  timeTextUpdate(TextView timeText){
-        long time = System.currentTimeMillis() - TimerButtonsAction.startTime;
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss:SS");
-        String temporaryString = sdf.format(time);
+        long time = System.currentTimeMillis() - startTime;
+        Duration timeDuration = Duration.ofMillis(time);
+        long hours = timeDuration.toHours();
+        int minutes = (int)timeDuration.minusHours(hours).toMinutes();
+        int seconds = (int)timeDuration.minusHours(hours).minusMinutes(minutes).getSeconds();
+        int millis = (int)timeDuration.minusHours(hours).minusMinutes(minutes).minusSeconds(seconds).toMillis();
+
+        NumberFormat numformat = new DecimalFormat("00");
+
+         String temporaryString = numformat.format(hours) + ":"+
+                                numformat.format(minutes) + ":" +
+                                numformat.format(seconds) + ":" +
+                                numformat.format(millis).substring(0,2);
+
         timeText.setText(temporaryString);
     }
 
