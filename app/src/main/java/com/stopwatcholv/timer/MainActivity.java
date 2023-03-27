@@ -7,19 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stopwatcholv.timer.adapters.ItemSavedTimeAdapter;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.stopwatcholv.timer.notes.NotesActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton startButton;
     private ImageButton restartButton;
     private ImageButton addButton;
+    private Button toNotes;
     public static ImageButton copyButton;
     public static ImageButton deleteAllButton;
     public static Handler handler = new Handler();
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setVisibility(View.GONE);
         copyButton = findViewById(R.id.btn_copy);
         copyButton.setVisibility(View.GONE);
+        toNotes = findViewById(R.id.to_notes_button);
 
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -102,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
                 ClipData clip = ClipData.newPlainText("copied", SavedTimeList.textToCopy());
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        toNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchActivity = new Intent(MainActivity.this, NotesActivity.class);
+                    startActivity(switchActivity);
+
             }
         });
 

@@ -9,20 +9,28 @@
     <LinearLayout
         android:id="@+id/general_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/cred"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Created by Olviia"
-            android:textAlignment="center"
-            android:textSize="14sp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp">
+
+            <Button
+                android:id="@+id/to_notes_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/layout_timer"
@@ -47,6 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/btn_restart"
                 android:layout_width="wrap_content"
@@ -61,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:backgroundTint="@color/green"
-                android:src="@drawable/add_icon"/>
+                android:src="@drawable/add_icon" />
+
             <ImageButton
                 android:id="@+id/btn_copy"
                 android:layout_width="wrap_content"
@@ -79,7 +89,6 @@
                 android:src="@drawable/delete_big_icon" />
 
 
-
             <ImageButton
                 android:id="@+id/btn_start"
                 android:layout_width="wrap_content"
@@ -94,8 +103,8 @@
             android:id="@+id/recycler_saved_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_recycler"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/border_recycler" />
 
     </LinearLayout>
 
