@@ -6,34 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".notes.NotesActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-102dp">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttons_container"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
-            android:id="@+id/notes_scroll_view"
+        <LinearLayout
+            android:id="@+id/linear_layout_notes"
             android:layout_width="match_parent"
-            android:layout_height="514dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/notes_container"
+                android:name="com.stopwatcholv.timer.notes.NotesFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                tools:layout="@layout/fragment_notes" />
+        </LinearLayout>
+    </ScrollView>
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/green"
-            app:srcCompat="@drawable/add_icon" />
-    </LinearLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/buttons_container"
+        android:name="com.stopwatcholv.timer.notes.ButtonsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/fragment_buttons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
